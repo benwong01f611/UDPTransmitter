@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+        android:padding="24dp"
+        android:paddingTop="16dp"
+        android:id="@+id/ll">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:text="@string/waitconnect"
+            android:textSize="16sp"
+            android:id="@+id/waitconnect"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/port_layout"
+            android:hint="@string/hintport">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/port"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:focusedByDefault="true"
+                android:text="3000"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <!-- Start/stop button -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/start_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:onClick="onclick_start"
+                android:text="@string/start" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/stop_button"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_toStartOf="@id/start_button"
+                android:layout_toRightOf="@id/start_button"
+                android:onClick="onclick_stop"
+                android:enabled="false"
+                android:text="@string/stop" />
+
+        </RelativeLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cmd_layout"
+            android:hint="@string/hintcmd">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/cmd"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/submit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:onClick="onclick_submit"
+                android:text="@string/submit" />
+
+        </RelativeLayout>
+        <!-- Movement -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/rotate_left_btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/r_left"
+                android:layout_margin="10sp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/forward_btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/rotate_left_btn"
+                android:layout_toRightOf="@id/rotate_left_btn"
+                android:text="@string/forw"
+                android:layout_margin="10sp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/rotate_right_btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/forward_btn"
+                android:layout_toRightOf="@id/forward_btn"
+                android:text="@string/r_right"
+                android:layout_margin="10sp"/>
+        </LinearLayout>
+        <!-- Rotation -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/rot_x_layout"
+                android:hint="@string/x"
+
+                android:layout_margin="10sp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/rot_x"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:maxLines="1"
+                    android:text="0" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/rot_y_layout"
+                android:hint="@string/y"
+                android:layout_toEndOf="@id/rot_x_layout"
+                android:layout_toRightOf="@id/rot_x_layout"
+
+                android:layout_margin="10sp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/rot_y"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:maxLines="1"
+                    android:text="0"  />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/rot_z_layout"
+                android:hint="@string/z"
+                android:layout_toEndOf="@id/rot_y_layout"
+                android:layout_toRightOf="@id/rot_y_layout"
+                android:layout_margin="10sp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/rot_z"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:maxLines="1"
+                    android:text="0"  />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/submit_rot_btn"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:onClick="onclick_submit_rot"
+                android:text="@string/btn_rot"
+                android:layout_margin="10sp"/>
+        </LinearLayout>
+
+
+        <!-- Translation -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/tra_x_layout"
+                android:hint="@string/x"
+
+                android:layout_margin="10sp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tra_x"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:maxLines="1"
+                    android:text="0" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/tra_y_layout"
+                android:hint="@string/y"
+                android:layout_toEndOf="@id/tra_x_layout"
+                android:layout_toRightOf="@id/tra_x_layout"
+
+                android:layout_margin="10sp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tra_y"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:maxLines="1"
+                    android:text="0"  />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/tra_z_layout"
+                android:hint="@string/z"
+                android:layout_toEndOf="@id/tra_y_layout"
+                android:layout_toRightOf="@id/tra_y_layout"
+                android:layout_margin="10sp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tra_z"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:maxLines="1"
+                    android:text="0"  />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/submit_tra_btn"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:onClick="onclick_submit_tra"
+                android:text="@string/btn_tra"
+                android:layout_margin="10sp"/>
+        </LinearLayout>
+
+        <!--Translation leg -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/leg_menu_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="@string/leg_menu">
+
+                <AutoCompleteTextView
+                    android:id="@+id/leg_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/leg_x_layout"
+                android:hint="@string/x"
+
+                android:layout_margin="10sp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/leg_x"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:maxLines="1"
+                    android:text="0"  />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/leg_y_layout"
+                android:hint="@string/y"
+                android:layout_toEndOf="@id/leg_x_layout"
+                android:layout_toRightOf="@id/leg_x_layout"
+
+                android:layout_margin="10sp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/leg_y"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:maxLines="1"
+                    android:text="0"  />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/leg_z_layout"
+                android:hint="@string/z"
+                android:layout_toEndOf="@id/leg_y_layout"
+                android:layout_toRightOf="@id/leg_y_layout"
+                android:layout_margin="10sp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/leg_z"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:maxLines="1"
+                    android:text="0"  />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/submit_leg_btn"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:onClick="onclick_submit_leg"
+                android:text="@string/btn_leg"
+                android:layout_margin="10sp"/>
+        </LinearLayout>
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            android:text="@string/label_datarecv"
+            android:textAllCaps="true"
+            android:textSize="16sp" />
+    </LinearLayout>
+</ScrollView>
